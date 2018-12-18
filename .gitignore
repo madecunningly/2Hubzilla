@@ -98,3 +98,4 @@ ENV/
 # pytest
 
 **/.pytest_cache/**
+.pytest_cache/**
