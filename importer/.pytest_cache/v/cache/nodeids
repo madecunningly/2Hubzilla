@@ -1,0 +1,4 @@
+[
+  "tests/test_basic.py::test_configInfo",
+  "tests/test_basic.py::test_authToken"
+]

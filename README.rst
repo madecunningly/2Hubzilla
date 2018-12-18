@@ -1,12 +1,8 @@
-Sample Module Repository
+hubzilla import / export 
 ========================
 
-This simple project is an example repo for Python projects.
+goal: easy to run scripts that will import various content into hubzilla 
 
-`Learn more <http://www.kennethreitz.org/essays/repository-structure-and-python>`_.
+streach goal: cross-posting
 
----------------
 
-If you want to learn more about ``setup.py`` files, check out `this repository <https://github.com/kennethreitz/setup.py>`_.
-
-✨🍰✨
