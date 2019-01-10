@@ -2,6 +2,8 @@ import requests
 from mastodon import Mastodon
 import logging
 import configparser
+import json
+from pathlib import Path
 
 
 log = logging.getLogger(__name__)
@@ -11,21 +13,17 @@ def getMastodonConfig():
     config = configparser.ConfigParser()
     log.info(config.sections())
 
-    config.read('../../config.ini')
+    p = Path('.')
+    path = p.joinpath('config.ini')
+    config.read(path)
 
-    log.info(config.sections())
-
-    if config['MASTODON']:
-        for key in config['MASTODON']:
-            print(key)
-
-        return(config['MASTODON'])
+    return config['MASTODON']
 
 
 def registerApp():
     new_app = Mastodon.create_app(
         'pytooterapp',
-        scopes=['read', 'write', 'follow', 'push']
+        scopes=['read', 'write', 'follow', 'push'],
         api_base_url='https://mastodon.social',
         to_file='pytooter_clientcred.secret'
     )
@@ -70,18 +68,29 @@ def get(access_token):
     mastodon.toot('Tooting from python using #mastodonpy again!')
 
 
-def getInstallationData():
+def getInstanceData(access_token):
     mastodon = Mastodon(
+        access_token=access_token,
         api_base_url='https://mastodon.social'
     )
-    mastodon.retrieve_mastodon_version()
+    version = mastodon.retrieve_mastodon_version()
+
+    stats = mastodon.instance()
+
+    print('version:' + repr(version))
+    print(type(stats))
+    for item in stats:
+        print(repr(item))
+        print('\t ' + repr(stats[item]))
+        print('\n')
 
 
 def main():
 
-    #access_token = getMastodonConfig()['access_token']
+    access_token = getMastodonConfig()['ACCESS_TOKEN']
+    #access_token = getMastodonConfig()
 
-    print(getInstallationData())
+    getInstanceData(access_token)
 
 
 if __name__ == "__main__":

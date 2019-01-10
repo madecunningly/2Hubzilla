@@ -13,9 +13,3 @@ def getMastodonConfig():
     config.read('../config.ini')
 
     log.info(config.sections())
-
-    if config['MASTODON']:
-        for key in config['MASTODON']:
-            print(key)
-
-        return(config['MASTODON'])
